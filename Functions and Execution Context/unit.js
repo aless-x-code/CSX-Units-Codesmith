@@ -123,4 +123,112 @@ console.log(two); // should log: true
 // console: true, true
 
 //_______________________________________________________
-// 
+// Invoking functions
+
+// Execution enviorment =  global
+//Exectution thread (line by line, not leaving anything undone) / Memory
+
+let calls = ""; // memory = [calls:" "]
+
+function jerry(str) {
+  // not called, stored in memory
+  return "Jerry" + kramer(); // run function, added to call stack: return (exit to global) => mememory update [calls="Jerry" + ("undefined(kramer())")] // added to stack, fun function
+}
+
+function george(str) {
+  return "George" + elaine();
+}
+
+function elaine(str) {
+  return "Elaine";
+}
+
+function kramer(str) {
+  return "Kramer" + george();
+}
+
+calls = jerry(calls); // update memory [calls="undefined"] => fun function
+console.log(calls); // console 'JerryKramerGeorgeElaine' // console.log(calls) <= memory
+
+//_______________________________________________________
+// makePlans based on condition
+
+let friendsAvailable = true;
+
+function makePlans(name) {
+  return callFriend(friendsAvailable, name); // invoking callFriend(given friendsAvailable, its name)
+}
+
+function callFriend(bool, name) {
+  if (bool == true) {
+    return "Plans made with " + name + " this weekend"; // if friend is available, retunr string
+  } else {
+    // if friend not available, return string
+    return "Everyone is busy this weekend";
+  }
+}
+
+console.log(makePlans("Mary")); // console: "Plans made with Mary this weekend'
+friendsAvailable = false;
+console.log(makePlans("James")); // console: "Everyone is busy this weekend."
+
+//_______________________________________________________
+// console log the contents of the function
+
+function add20(num) {
+  return num + 20;
+}
+
+// CREATE YOUR CONSOLE.LOG BELOW
+
+console.log(add20);
+//function add20 (num){ return num + 20 }
+
+//________________________________________________________
+// sort and return
+
+// return remainder => largeNum % smallNum
+
+function getRemainder(num1, num2) {
+  let step = [num1, num2];
+  step.sort((a, b) => (a === b ? 0 : a > b ? 1 : -1));
+  // step = // [small, big]
+  return step[1] % step[0];
+}
+
+// sorting function
+step.sort((a, b) => (a === b ? 0 : a > b ? 1 : -1));
+
+//________________________________________________________
+// forEach loop
+
+function droids(arr) {
+  let result = "";
+  arr.forEach((item) =>
+    item == "Droids" ? (result = "Found Droids!") : (result = "no")
+  );
+
+  return result;
+}
+
+const starWars = ["Luke", "Finn", "Rey", "Kylo", "Droids"];
+const thrones = ["Jon", "Danny", "Tyrion", "The Mountain", "Cersei"];
+console.log(droids(starWars)); //  log: "Found Droids!"
+console.log(droids(thrones)); // log: "These are not the droids you're looking for."
+
+//________________________________________________________
+// sort and return
+
+
+function addN(arr, n) {
+  // ADD CODE HERE
+
+  for (let i = 0; i < arr.length; i++) {
+    arr[i] += n;
+  }
+  return arr;
+}
+
+// Uncomment these to check your work!
+console.log(addN([1, 2, 3], 3)); // expected log [4, 5, 6]
+console.log(addN([3, 4, 5], 2)); // expected log [5, 6, 7]
