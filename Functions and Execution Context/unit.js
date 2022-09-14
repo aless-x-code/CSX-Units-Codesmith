@@ -217,18 +217,212 @@ console.log(droids(starWars)); //  log: "Found Droids!"
 console.log(droids(thrones)); // log: "These are not the droids you're looking for."
 
 //________________________________________________________
-// sort and return
-
+// return the each element of the array summed with the n
 
 function addN(arr, n) {
-  // ADD CODE HERE
-
   for (let i = 0; i < arr.length; i++) {
     arr[i] += n;
+    // return arr // if you returned at this point, the function will add arr[0]+1 and immeditaly exit
   }
-  return arr;
+  return arr; // return at this point, allows for loop to iterate through each element, then exit once completed
 }
 
 // Uncomment these to check your work!
 console.log(addN([1, 2, 3], 3)); // expected log [4, 5, 6]
 console.log(addN([3, 4, 5], 2)); // expected log [5, 6, 7]
+
+//________________________________________________________
+// add all array elements
+
+function getTheSum(arr) {
+  // ADD CODE HERE
+  let arrTot = 0; // intialize at 0
+
+  for (let i = 0; i < arr.length; i++) {
+    arrTot += arr[i]; // add each iteration to 0
+  }
+
+  return arrTot; // after all runned, exit/return
+}
+
+console.log(getTheSum([3, 6, 9])); // expected log 18
+console.log(getTheSum([10, 11, 12])); // expected log 33
+
+//________________________________________________________
+// multiply all arguments by each other
+
+function multiplyAll() {
+  let multiplication = arguments[0]; // initialize multiplication at argument[0], not 0, 0*any number is 0
+
+  // we access arguments with keyword "arguments"
+  // iterate thru arguments, initiated at index 1, since default is index 0
+  for (let i = 1; i < arguments.length; i++) {
+    // multiplication equals multiplication*argument[i]
+    multiplication *= arguments[i];
+  }
+
+  // after iteration fully done, we exit
+  return multiplication;
+}
+
+console.log(multiplyAll(9, 4, 5, 6, 7, 2, 1, 8, 3)); // should log: 362880
+console.log(multiplyAll(5, 5, 5, 3)); // should log: 375
+
+//________________________________________________________
+// sum corresponsding elemnts of array
+
+function mergingElements(array1, array2) {
+  // ADD CODE HERE
+
+  let sum = []; // set array
+
+  for (let i = 0; i < array1.length; i++) {
+    // operate index 0 and index 0, and then push to new array => repeat
+    sum.push(array1[i] + array2[i]);
+  }
+  // complete iteration, then exit/return
+  return sum;
+}
+
+// Uncomment these to check your work!
+console.log(mergingElements([1, 2, 3, 4], [5, 6, 7, 8])); // expected log [6, 8, 10, 12]
+console.log(mergingElements([7, 3, 6, 0], [3, 9, 17, 81])); // expected log [10, 12, 23, 81]
+
+//________________________________________________________
+// given 2 arrays, return a new one based on conditions
+
+function mergingTripletsAndQuints(array1, array2) {
+  // ADD CODE HERE
+
+  // return new array, replacing numbers in array1 if divisible by 3 or 5
+  // number should be replaced with (itself + corresponding index of array2)
+  // [1, 2, 3, 4, 5][1, 1, 1, 1, 1] == [1, 2, 4, 6]
+
+  // empty array
+  let merge = [];
+  // iterate thru array1
+  for (let i = 0; i < array1.length; i++) {
+    // if element divisible by 3 or 5
+    if ((array1[i] % 3 == 0) | (array1[i] % 5 === 0)) {
+      // push that element + array2 at same index
+      merge.push(array1[i] + array2[i]);
+      // if nothing applies, just push it to array
+    } else {
+      merge.push(array1[i]);
+    }
+  }
+
+  return merge;
+}
+
+// Uncomment these to check your work!
+console.log(mergingTripletsAndQuints([1, 2, 3, 4, 5, 15], [1, 3, 6, 7, 8, 9])); // expected log [1, 2, 9, 4, 13, 24]
+console.log(mergingTripletsAndQuints([1, 1, 3, 9, 5, 15], [1, 2, 3, 4, 5, 6])); // expected log [1, 1, 6, 13, 10, 21]
+
+//________________________________________________________
+// countdown + reaction
+
+function imAboutToExplodeWithExcitement(n) {
+  // ADD CODE HERE
+
+  // write a while loop that countdowns from n
+  let countdown = [];
+  while (n > 0) {
+    n -= 1;
+    // when countdown reaches 5, print 'Oh wow, I can't handle the anticipation!'
+    if (n == 5) {
+      countdown.push(n, "Oh wow, I can't handle the anticipation!");
+    } // when countdown reaches 3, print 'I'm about to explode with excitement!'
+    else if (n == 3) {
+      countdown.push(n, "I'm about to explode with excitement!");
+    } // when countdown finishes, print 'That was kind of a let down'
+    else if (n == 0) {
+      countdown.push("That was kind of a let down");
+    } else {
+      countdown.push(n);
+    }
+  }
+
+  return countdown;
+}
+
+// Uncomment the line below to check your work!
+console.log(imAboutToExplodeWithExcitement(10)); // expected log 10, 9, 8, 7, 6, 'Oh wow, I can't handle the anticipation!', 4, I'm about to explode with excitement!', 2, 1, 'That was kind of a let down'
+
+//________________________________________________________
+// given random number, find which argument is closest
+
+function closestToTheMark(player1, player2) {
+  // random number
+  const theMark = Math.floor(Math.random() * 100);
+  console.log(`If theMark is ${theMark}...`);
+
+  console.log(Math.abs(theMark - player1));
+  console.log(Math.abs(theMark - player2));
+
+  //  if (distance between player1 and theMark) is lower (than distance of player2 and the Mark), then player1 is closest (p.n. Math.abs = absolute value, no negatives)
+  if (Math.abs(player1 - theMark) < Math.abs(player2 - theMark)) {
+    return "Player 1 is closest";
+  } // otherwise, player2 is closest
+  else {
+    return "Player 2 is closest";
+  }
+}
+
+// Uncomment the line below to check your work!
+console.log(closestToTheMark(25, 75));
+
+////////////////////////////////////////////////////////////////////////////
+//// adding all the weirdstuff
+////////////////////////////////////////////////////////////////////////////
+
+function addingAllTheWeirdStuff(array1, array2) {
+  // sum of the odd numbers of Array2
+  let oddSumArray2 = 0;
+  for (let i = 0; i < array2.length; i++) {
+    if (array2[i] % 2 != 0) {
+      oddSumArray2 += array2[i];
+    }
+  }
+
+  // sum of the even numbers of Array2
+  let evenSumArray2 = 0;
+  for (let i = 0; i < array2.length; i++) {
+    if (array2[i] % 2 == 0) {
+      evenSumArray2 += array2[i];
+    }
+  }
+
+  for (let i = 0; i < array1.length; i++) {
+    // if array1 element under 10, add oddSumArray2
+    if (array1[i] < 10) {
+      array1[i] += oddSumArray2;
+      // if array1 element over 10, add evenSumArray2
+    } else {
+      array1[i] += evenSumArray2;
+    }
+  }
+
+  // if any array2 element is over 20...
+  let detectOver20 = false;
+  for (let i = 0; i < array2.length; i++) {
+    if (array2[i] > 20) {
+      detectOver20 = true;
+    }
+  }
+  // add +1 to each element in array1
+  if (detectOver20 == true) {
+    for (let i = 0; i < array1.length; i++) {
+      array1[i] += 1;
+    }
+  }
+  return array1;
+}
+
+// Uncomment these to check your work!
+console.log(addingAllTheWeirdStuff([1, 3, 5, 17, 15], [1, 2, 3, 4, 5])); // expected log [10, 12, 14, 23, 21]
+console.log(addingAllTheWeirdStuff([1, 3, 5, 17, 15, 1], [1, 2, 3, 4, 5, 22])); // expected log [11, 13, 15, 46, 44, 11]
+
+////////////////////////////////////////////////////////////////////////////
+/////
+////////////////////////////////////////////////////////////////////////////
